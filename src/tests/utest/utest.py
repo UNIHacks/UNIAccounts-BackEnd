@@ -1,10 +1,16 @@
-# import sys
+def sum(x, y):
+    return x + y
 
-# sys.path.append("src/")
+import unittest
 
-# from tests.utest.tools.test_function_dict import *
-# from tests.utest.tools.test_function_jwt import *
-# from tests.utest.models.test_user import *
+class TestSum(unittest.TestCase):
 
-# if __name__ == '__main__':
-#     unittest.main(verbosity=2)
+     def test_sum(self):
+        self.assertEqual(sum(8, 9), 17, "Sum of 8 + 9 = 7")
+        
+     def test_no_sum(self):
+        self.assertEqual(sum(8, 9), 17, "Sum of 8 + 9 = 7")
+         
+
+if __name__ == '__main__':
+    unittest.main(verbosity=2)

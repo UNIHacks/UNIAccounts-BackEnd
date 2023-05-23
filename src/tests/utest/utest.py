@@ -6,10 +6,10 @@ import unittest
 class TestSum(unittest.TestCase):
 
      def test_sum(self):
-        self.assertEqual(sum(8, 9), 17, "Sum of 8 + 9 = 7")
+        self.assertEqual(sum(8, 9), 17, "Sum of 8 + 9 = 17")
         
      def test_no_sum(self):
-        self.assertEqual(sum(8, 9), 17, "Sum of 8 + 9 = 7")
+        self.assertEqual(sum(8, 9), 17, "Sum of 8 + 9 = 17")
          
 
 if __name__ == '__main__':

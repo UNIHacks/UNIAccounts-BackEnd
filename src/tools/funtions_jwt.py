@@ -1,50 +1,34 @@
-######################################################################
-# author = Rafael Zamora
-# copyright = Copyright 2023, UNICA-ManagerAccounts
-# date = 10/04/2023
-# license = PSF
-# version = 1.0
-# maintainer = Rafael Zamora
-# email = rafa.zamora.rals@gmail.com
-# status = Development
-######################################################################
-
 # System Packages
 from datetime import datetime, timedelta
 
 # External Packages
-from jwt import encode, decode, exceptions
+from jwt import decode, encode, exceptions
 
 # Local Packages
-import ENVS
+import config.base as CONFIG
 
 
-def expire_date(days: int):
-    """Generates a date and from the current date plus the indicated days 
-
-    Args:
-        days (int):
-
-    Returns:
-        date: new Date
-    """
-    now = datetime.now()
-    new_date = now + timedelta(days)
-    return new_date
-
-
-def write_token(data: dict):
-    """Generates a token using the selected dict as a base
+def expire_date(minutes: int):
+    """Generates a date and from the current date plus the indicated minutes
 
     Args:
-        data (dict): Object that will be used to generate the token
+        minutes (int): The number of minutes until the token should expire
 
     Returns:
-        bytes: token generated
+        datetime: The expiration date of the token
     """
-    token = encode(payload={**data, "exp": expire_date(2)},
-                   key=ENVS.SECRET_KEY_TOKEN, algorithm="HS256")
-    return token.encode("UTF-8")
+    now = datetime.utcnow()  # Obtén la hora actual en UTC
+    expiration_date = now + timedelta(minutes=minutes)
+    return expiration_date
+
+
+def write_token(data: dict, minutes_until_expire: int = 120):
+    token = encode(
+        payload={**data, "exp": expire_date(minutes_until_expire)},
+        key=CONFIG.SECRET_KEY_TOKEN,
+        algorithm="HS256",
+    )
+    return token
 
 
 def validate_token(token: str):
@@ -56,11 +40,14 @@ def validate_token(token: str):
     Returns:
         dict: response of func
     """
+
+    token_is_valid = False
+    response = None
     try:
-        return {"message": "Valid Token", "user": decode(token, key=ENVS.SECRET_KEY_TOKEN, algorithms=["HS256"])}
+        response = decode(token, key=CONFIG.SECRET_KEY_TOKEN, algorithms=["HS256"])
+        token_is_valid = True
     except exceptions.DecodeError:
-        response = {"message": "Invalid Token", 'user': ''}
-        return response
+        response = "Invalid Token"
     except exceptions.ExpiredSignatureError:
-        response = {"message": "Token Expired", 'user': ''}
-        return response
+        response = "Token Expired"
+    return token_is_valid, response

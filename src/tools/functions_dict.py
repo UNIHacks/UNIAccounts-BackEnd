@@ -1,15 +1,4 @@
-######################################################################
-# author = Rafael Zamora
-# copyright = Copyright 2023, UNICA-ManagerAccounts
-# date = 10/04/2023
-# license = PSF
-# version = 1.0
-# maintainer = Rafael Zamora
-# email = rafa.zamora.rals@gmail.com
-# status = Development
-######################################################################
-
-def get_from_dict(dictionary: dict, key: str, default_value = ''):
+def get_from_dict(dictionary: dict, key: str, default_value=""):
     """Wrapper to get a dictionary value
 
     Args:
@@ -21,7 +10,7 @@ def get_from_dict(dictionary: dict, key: str, default_value = ''):
         Any: value
     """
     value = dictionary.get(key)
-    
-    if value == None:
+
+    if value is None:
         return default_value
     return value

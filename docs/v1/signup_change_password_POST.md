@@ -1,6 +1,6 @@
 ## Request Change Password of Acount *signUp*
 
-Send a email to user mail for Change Password of Acount 
+Send a email to user mail for Change Password of Acount
 
 <p class="route_text">
     <span class="method-POST">POST</span> <code>https://unica-accounts.com/api/v1/signup-change-password/</code>

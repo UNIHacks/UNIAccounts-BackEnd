@@ -36,7 +36,7 @@ SERVICE_PERMISSIONS = {
     ],
 }
 
-PORT = 4000
+PORT = 5000
 
 DEBUG = True
 

@@ -23,3 +23,7 @@ class UserSchema(BaseModel):
 class UserSigninSchema(BaseModel):
     user_name: str
     password: str
+    
+    
+class UserForgotPasswordSchema(BaseModel):
+    user_name: str

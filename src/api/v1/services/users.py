@@ -32,3 +32,10 @@ class UserService:
         )
         session.close()
         return user
+    
+    def change_password(self, user_name: str, new_password: str) -> UsersModel:
+        session = get_session()
+        user = (session.query(UsersModel).filter(UsersModel.user_name==user_name).first())
+        user.password = generate_password_hash(new_password)
+        session.commit()
+        return user

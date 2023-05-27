@@ -51,3 +51,9 @@ elif ENVIRONMENT == "production":
     from config.production import *
 else:
     raise ValueError("Debes especificar una variable de entorno ENVIRONMENT valida.")
+
+
+SMTP_HOST = 'smtp.office365.com'
+SMTP_PORT = 587
+SMTP_USER = config("SMTP_USER")
+SMTP_PASSWORD = config("SMTP_PASSWORD")

@@ -8,6 +8,7 @@ import config.base as CONFIG
 from tools.functions_authentication import valid_headers
 
 from ..views.users import signup_route_POST
+from ..views.forgot_codes import forgot_password_POST, forgot_password_PUT
 
 views_users = Blueprint("users", __name__)
 
@@ -68,3 +69,23 @@ def signup_app():
             return render_template('error_signup.html')
 
     return render_template('signup.html')
+
+@views_users.route("/api/v1/forgot-password", methods=["POST", "PUT"])
+def forgot_password():
+    """Forgot Password EndPoint
+
+    Returns:
+        dict: JSON response
+        int: status code of the request
+    """
+
+    response_credentials, status_code = valid_headers(request)
+    if not response_credentials.get("Success"):
+        return response_credentials, status_code
+
+    if request.method == "POST":
+        response = forgot_password_POST(parameters_json=request.get_json())
+        return response
+    if request.method == "PUT":
+        response = forgot_password_PUT(parameters_json=request.get_json())
+        return response

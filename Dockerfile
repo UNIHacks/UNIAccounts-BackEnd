@@ -1,15 +1,20 @@
-FROM alpine:3.10
+# Usamos una imagen base con Python
+FROM python:3.9
 
-RUN apk add --no-cache python3-dev \
-    && pip3 install --upgrade pip
-
+# Establecemos el directorio de trabajo en /app
 WORKDIR /app
 
+# Copiamos los archivos de la aplicación a la imagen
 COPY ./src /app
-COPY ./requirements.txt requirements.txt
+COPY ./requirements/local.txt /app/requirements.txt
 
-RUN pip3 --no-cache-dir install -r requirements.txt
+# Instalamos las dependencias
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Definimos el puerto en el que se ejecutará la aplicación Flask
+EXPOSE 5000
+
+# Comando para ejecutar la aplicación Flask y especificar el archivo principal
+CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]
 
 
-
-CMD ["python3", "app.py"]

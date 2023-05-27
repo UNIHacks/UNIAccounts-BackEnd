@@ -3,14 +3,6 @@ services:
   api-unica:
     build: .
     ports:
-      - "7000:4000"
+      - "5000:5000"
     volumes:
           - ./src:/app
-  mongo-db:
-    image: mongo
-    ports:
-      - "27017:27017"
-    volumes:
-          - ./DB:/data/db
-    container_name: mongo_db_unica
-    hostname: mongo_db_unica

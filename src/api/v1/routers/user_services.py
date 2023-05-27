@@ -1,10 +1,12 @@
 # External Packages
 from flask import Blueprint, request
 
+#Local Packages
 from tools.functions_authentication import valid_headers
 
 from ..views.user_services import signup_service_route_POST
 
+#Definition of Views
 views_user_services = Blueprint("user_services", __name__)
 
 
@@ -13,8 +15,16 @@ def signup_service():
     """SignUp EndPoint
 
     Returns:
-        dict: JSON response
-        int: status code of the request
+        tuple: tuple of Dict and HTTP Code exmaple
+        {
+            "Data": {
+                .
+                .
+                .
+            },
+            "Message": "....",
+            "Success": true
+        }
     """
 
     response_credentials, status_code = valid_headers(request)

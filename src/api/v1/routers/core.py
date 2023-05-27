@@ -1,11 +1,13 @@
 # External Packages
 from flask import Blueprint, request
 
+#Local Packages
 import config.base as CONFIG
 from tools.functions_authentication import valid_headers
 
 from ..views.core import signin_route_PUT, validate_token_route_GET
 
+#Definition of Views
 views_core = Blueprint("core", __name__)
 
 
@@ -22,6 +24,20 @@ def index():
 
 @views_core.route("/api/v1/signin", methods=["PUT"])
 def signin():
+    """SignIn Route
+
+    Returns:
+        tuple: tuple of Dict and HTTP Code exmaple
+        {
+            "Data": {
+                .
+                .
+                .
+            },
+            "Message": "....",
+            "Success": true
+        }
+    """
     response_credentials, status_code = valid_headers(request)
     if not response_credentials.get("Success"):
         return response_credentials, status_code
@@ -33,6 +49,20 @@ def signin():
 
 @views_core.route("/api/v1/validate_token", methods=["GET"])
 def validate_token():
+    """Validate JWT Route
+
+    Returns:
+        tuple: tuple of Dict and HTTP Code exmaple
+        {
+            "Data": {
+                .
+                .
+                .
+            },
+            "Message": "....",
+            "Success": true
+        }
+    """
     response_credentials, status_code = valid_headers(request)
     if not response_credentials.get("Success"):
         return response_credentials, status_code
@@ -47,6 +77,6 @@ def test():
     """Test Route
 
     Returns:
-        str:
+        str: simple str
     """
     return "Hello World!!!"

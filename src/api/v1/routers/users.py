@@ -18,8 +18,16 @@ def signup():
     """SignUp EndPoint
 
     Returns:
-        dict: JSON response
-        int: status code of the request
+        tuple: tuple of Dict and HTTP Code exmaple
+        {
+            "Data": {
+                .
+                .
+                .
+            },
+            "Message": "....",
+            "Success": true
+        }
     """
 
     response_credentials, status_code = valid_headers(request)
@@ -75,8 +83,16 @@ def forgot_password():
     """Forgot Password EndPoint
 
     Returns:
-        dict: JSON response
-        int: status code of the request
+        tuple: tuple of Dict and HTTP Code exmaple
+        {
+            "Data": {
+                .
+                .
+                .
+            },
+            "Message": "....",
+            "Success": true
+        }
     """
 
     response_credentials, status_code = valid_headers(request)

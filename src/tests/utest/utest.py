@@ -1,17 +1,20 @@
-def sum(x, y):
-    return x + y
+import os
+import sys
+
+
+BASE_DIR = os.path.dirname((os.path.dirname(os.path.abspath(__file__)))) + '/..'
+
+LIST_PATH_TO_ADD = [BASE_DIR]
+sys.path.extend(LIST_PATH_TO_ADD)
 
 import unittest
 
-class TestSum(unittest.TestCase):
+from tests.utest.models.test_user import TestUser
 
-     def test_sum(self):
-        self.assertEqual(sum(8, 9), 17, "Sum of 8 + 9 = 17")
-        
-     def test_no_sum(self):
-        self.assertEqual(sum(8, 9), 17, "Sum of 8 + 9 = 17")
-        self.assertEqual(sum(8, 9), 17, "Sum of 8 + 9 = 17")
-         
+from tests.utest.api.v1.schemas.test_users import UserSchemaTestCase
+
+from tests.utest.api.v1.schemas.test_forgot_codes import ForgotCodesPasswordSchemaTestCase, ForgotCodesSchemaTestCase
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
